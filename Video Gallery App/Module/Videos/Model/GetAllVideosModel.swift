@@ -7,9 +7,16 @@
 
 
 import Foundation
+import AVFoundation
 
-struct GetAllVideosModel: Codable {
+struct GetAllVideosModel: Identifiable {
+    var id: String { publicID }
     let publicID: String
     let displayName: String
-    let url: String
+    let videoURLString: String
+    
+    var url: AVPlayer? {
+        guard let url = URL(string: videoURLString) else { return nil }
+        return AVPlayer(url: url)
+    }
 }

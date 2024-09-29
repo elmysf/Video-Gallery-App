@@ -13,6 +13,7 @@ struct VideoGalleryPickerView: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var isShown: Bool
+    @Binding var isPreviewPresented: Bool
     @Binding var selectedVideo: URL?
     @Environment(\.presentationMode) private var presentationMode
 
@@ -47,10 +48,12 @@ struct VideoGalleryPickerView: UIViewControllerRepresentable {
                 parent.selectedVideo = videoURL
             }
             parent.isShown = false
+            parent.isPreviewPresented = false
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             parent.isShown = false
+            parent.isPreviewPresented = false
         }
     }
 }

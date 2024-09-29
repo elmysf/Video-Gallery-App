@@ -14,11 +14,19 @@ public class VideosViewModel: ObservableObject {
     @Published var listVideo = [GetAllVideosModel]()
     @Published var uploadVideo: UploadVideoResponse?
     @Published var deleteVideos: DeletedVideoResponse?
+    @Published var isDeleting: Bool = false
+    @Published var showSuccessDeleteAlert: Bool = false
+    @Published var showSuccessUploadAlert: Bool = false
+    @Published var isPreviewPresented: Bool = false
+    @Published var isShowPhotoLibrary: Bool = false
+    @Published var isShowCamera: Bool = false
+    @Published var showDeleteConfirmation: Bool = false
+    @Published var isLoadingAfterUpload: Bool = false
     @Published var player: AVPlayer?
     @Published var isLoading: Bool = true
     @Published var videoURL: URL?
-    private var playerItem: AVPlayerItem?
     
+    private var playerItem: AVPlayerItem?
     private let deletedService = DeleteDataService()
     private let uploadService = UploadVideoDataService()
     private let dataService = AllVideoDataService()
@@ -28,17 +36,18 @@ public class VideosViewModel: ObservableObject {
         self.videoURL = nil
     }
     
-    public func deleteVideo(publicID: String) {
+    public func deleteVideo(publicID: String, completion: @escaping () -> Void) {
         deletedService.deletedVideo(publicID: publicID)
             .receive(on: RunLoop.main)
-            .sink { [weak self] completion in
-                switch completion {
+            .sink { [weak self] completionResult in
+                switch completionResult {
                 case .failure(let error):
-                    self?.isLoading = false
-                    print("Failed to upload video: \(error.localizedDescription)")
+                    print("Failed to delete video: \(error.localizedDescription)")
                 case .finished:
                     self?.fetchAllVideo()
-                    print("deleted video \(publicID) successfully.")
+                    self?.showSuccessDeleteAlert = true
+                    self?.isDeleting = false
+                    completion()
                 }
             } receiveValue: { [weak self] response in
                 self?.deleteVideos = response
@@ -46,21 +55,21 @@ public class VideosViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    public func uploadVideo(videoURL: URL, publicID: String) {
+    public func uploadVideo(videoURL: URL, publicID: String, completion: @escaping () -> Void) {
         uploadService.postVideo(videoURL: videoURL, uploadPreset: "ml_default", publicID: publicID)
             .receive(on: RunLoop.main)
-            .sink { [weak self] completion in
-                switch completion {
+            .sink { [weak self] completionResult in
+                switch completionResult {
                 case .failure(let error):
-                    self?.isLoading = false
                     print("Failed to upload video: \(error.localizedDescription)")
                 case .finished:
-                    self?.isLoading = false
-                    print("Upload finished successfully.")
+                    self?.fetchAllVideo()
+                    self?.showSuccessUploadAlert = true
+                    self?.isLoadingAfterUpload = false
+                    completion()
                 }
             } receiveValue: { [weak self] response in
                 self?.uploadVideo = response
-                self?.fetchAllVideo()
             }
             .store(in: &cancellables)
     }
@@ -74,13 +83,13 @@ public class VideosViewModel: ObservableObject {
                 case .failure(let error):
                     debugPrint(error.localizedDescription)
                 case .finished:
-                    print("Success")
+                    self.isLoading = false
                 }
             } receiveValue: { [weak self] (video) in
                 let videoVM = video.resources.map { item in
                     GetAllVideosModel(publicID: item.publicID,
                                       displayName: item.displayName,
-                                      url: item.url)
+                                      videoURLString: item.url)
                     
                 }
                 self?.listVideo = videoVM

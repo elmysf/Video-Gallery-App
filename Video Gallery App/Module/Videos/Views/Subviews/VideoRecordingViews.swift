@@ -12,6 +12,7 @@ import UIKit
 
 struct VideoRecordingViews: UIViewControllerRepresentable {
     @Binding var isShown: Bool
+    @Binding var isPreviewPresented: Bool
     @Binding var videoURL: URL?
 
     func makeCoordinator() -> Coordinator {
@@ -42,10 +43,12 @@ struct VideoRecordingViews: UIViewControllerRepresentable {
                 parent.videoURL = videoURL
             }
             parent.isShown = false
+            parent.isPreviewPresented = false
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             parent.isShown = false
+            parent.isPreviewPresented = false
         }
     }
 }

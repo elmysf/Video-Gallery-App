@@ -18,17 +18,10 @@ struct VideoCardView: View {
             ZStack(alignment: .bottomLeading){
                 Image.imgOne
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 160, height: 250)
-                    .cornerRadius(30)
+                    .frame(width: 180, height: 250)
+                    .cornerRadius(16)
             }
             .padding(.horizontal, 16)
-            
-            Image(systemName: "play.fill")
-                .foregroundColor(.white)
-                .font(.title)
-                .padding()
-                .background(.purple)
-                .cornerRadius(50)
         }
     }
 }

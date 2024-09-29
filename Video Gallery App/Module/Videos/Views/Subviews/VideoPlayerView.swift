@@ -18,13 +18,10 @@ struct VideoPlayerView: View {
             if let player = videoVM.player {
                 VideoPlayer(player: player)
                     .ignoresSafeArea(.all)
-                    .task {
-                        self.videoVM.player = AVPlayer(url: URL(string: video.url)!)
-                    }
             }
         }
         .onAppear {
-            self.videoVM.loadVideo(url: video.url)
+            self.videoVM.loadVideo(url: video.videoURLString)
         }
     }
 }
