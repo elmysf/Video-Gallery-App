@@ -14,26 +14,10 @@ public enum FontError: Swift.Error {
 }
 
 func registerFont(named name: String) throws {
-    guard let asset = NSDataAsset(name: "Fonts/\(name)", bundle: Bundle.module) else {
-        throw FontError.failedToRegisterFont
-    }
-    let fontData = asset.data as CFData
-    guard let fontDescriptors = CTFontManagerCreateFontDescriptorsFromData(fontData) as? [CTFontDescriptor],
-          !fontDescriptors.isEmpty else {
-        throw FontError.failedToRegisterFont
-    }
-    
-    let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
-    
-    do {
-        try asset.data.write(to: tempURL)
-        var error: Unmanaged<CFError>?
-        let success = CTFontManagerRegisterFontsForURL(tempURL as CFURL, .process, &error)
-        
-        if !success {
-            throw FontError.failedToRegisterFont
-        }
-    } catch {
-        throw FontError.failedToRegisterFont
-    }
+   guard let asset = NSDataAsset(name: "Fonts/\(name)", bundle: Bundle.module),
+      let provider = CGDataProvider(data: asset.data as NSData),
+      let font = CGFont(provider),
+      CTFontManagerRegisterGraphicsFont(font, nil) else {
+    throw FontError.failedToRegisterFont
+   }
 }

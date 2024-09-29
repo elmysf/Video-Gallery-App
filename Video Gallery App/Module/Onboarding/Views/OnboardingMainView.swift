@@ -20,8 +20,6 @@ struct OnboardingMainView<Content: View>: View {
     @State private var currentIndex: Int = 0
     @State private var deviceHeight = UIScreen.main.bounds.size.height
     
-    
-    
     init(numberOfImages: Int, showOnboarding: Binding<Bool>, isRedirectToHome: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self.numberOfImages = numberOfImages
         self._showOnboarding = showOnboarding

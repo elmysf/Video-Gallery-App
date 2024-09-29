@@ -1,10 +1,18 @@
+//
+//  AllVideosView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import SwiftUI
 import DesignSystemKit
 import AVFoundation
 import AVKit
 
 struct AllVideosView: View {
-    @StateObject private var videoVM = VideosViewModel()
+    @ObservedObject var videoVM: VideosViewModel
     @State private var isPreviewPresented: Bool = false
     @State private var isShowPhotoLibrary: Bool = false
     @State private var isShowCamera: Bool = false
@@ -13,16 +21,15 @@ struct AllVideosView: View {
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
 
     var body: some View {
-        ZStack() {
-            VStack() {
-                ScrollView(.vertical, showsIndicators: false, content: {
+        ZStack {
+            VStack {
+                ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(videoVM.listVideo, id: \.publicID) { item in
                             VStack {
                                 NavigationLink(destination: VideoPlayerView(video: item)) {
                                     VideoCardView(video: item)
                                 }
-                                // Delete Button
                                 Button(action: {
                                     self.videoToDelete = item
                                     self.showDeleteConfirmation = true
@@ -35,7 +42,7 @@ struct AllVideosView: View {
                             }
                         }
                     }
-                })
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
@@ -72,15 +79,14 @@ struct AllVideosView: View {
                 .padding(.horizontal, 16)
             }
         }
-
         .sheet(isPresented: $isShowCamera) {
-            RecordingView(isShown: $isShowCamera, videoURL: $videoVM.videoURL)
+            VideoRecordingViews(isShown: $isShowCamera, videoURL: $videoVM.videoURL)
                 .onDisappear {
-                    if let videoURL = videoVM.videoURL {
+                    if let videoURL = videoVM.videoURL, FileManager.default.fileExists(atPath: videoURL.path) {
                         let publicID = UUID().uuidString
                         self.videoVM.uploadVideo(videoURL: videoURL, publicID: publicID)
                     } else {
-                        print("No video was captured.")
+                        print("No valid video was captured.")
                     }
                 }
         }
@@ -88,28 +94,26 @@ struct AllVideosView: View {
         .sheet(isPresented: $isShowPhotoLibrary) {
             VideoGalleryPickerView(sourceType: .photoLibrary, isShown: $isShowPhotoLibrary, selectedVideo: self.$videoVM.videoURL)
                 .onDisappear {
-                    if let videoURL = videoVM.videoURL {
+                    if let videoURL = videoVM.videoURL, FileManager.default.fileExists(atPath: videoURL.path) {
                         let publicID = UUID().uuidString
                         self.videoVM.uploadVideo(videoURL: videoURL, publicID: publicID)
                     } else {
-                        print("No video was selected.")
+                        print("No valid video was selected.")
                     }
                 }
         }
-        // Delete Confirmation Dialog
         .confirmationDialog("Are you sure you want to delete this video?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
-                if let video = videoToDelete {
-                    videoVM.deleteVideo(publicID: video.publicID)
-                    videoToDelete = nil
+                if let videoToDelete = videoToDelete {
+                    DispatchQueue.main.async {
+                        videoVM.deleteVideo(publicID: videoToDelete.publicID)
+                    }
+                    self.videoToDelete = nil
                 }
             }
             Button("Cancel", role: .cancel) {
                 videoToDelete = nil
             }
-        }
-        .onAppear {
-            videoVM.fetchAllVideo()
         }
     }
 }

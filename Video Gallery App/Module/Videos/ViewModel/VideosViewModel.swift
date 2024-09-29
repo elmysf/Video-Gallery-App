@@ -1,3 +1,11 @@
+//
+//  VideosViewModel.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import Combine
 import NetworkingKit
 import AVFoundation
@@ -71,8 +79,8 @@ public class VideosViewModel: ObservableObject {
             } receiveValue: { [weak self] (video) in
                 let videoVM = video.resources.map { item in
                     GetAllVideosModel(publicID: item.publicID,
-                               displayName: item.displayName,
-                               url: item.url)
+                                      displayName: item.displayName,
+                                      url: item.url)
                     
                 }
                 self?.listVideo = videoVM
@@ -85,25 +93,25 @@ public class VideosViewModel: ObservableObject {
             print("Invalid video URL")
             return
         }
-
-        let asset = AVAsset(url: videoURL)
+        
+        let asset = AVURLAsset(url: videoURL)
         playerItem = AVPlayerItem(asset: asset)
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(playerItemStatusDidChange),
             name: .AVPlayerItemNewAccessLogEntry,
             object: playerItem
         )
-
+        
         DispatchQueue.main.async {
             self.player = AVPlayer(playerItem: self.playerItem)
         }
     }
-
+    
     @objc private func playerItemStatusDidChange(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem else { return }
-
+        
         switch item.status {
         case .readyToPlay:
             DispatchQueue.main.async {
@@ -120,7 +128,7 @@ public class VideosViewModel: ObservableObject {
             break
         }
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

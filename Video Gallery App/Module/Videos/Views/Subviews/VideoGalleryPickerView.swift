@@ -1,3 +1,11 @@
+//
+//  VideoGalleryPickerView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import UIKit
 import SwiftUI
 

@@ -10,6 +10,7 @@ import SwiftUI
 public struct ContentView: View {
     @AppStorage("showOnboarding") var showOnboarding: Bool = true
     @SwiftUI.Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    @StateObject private var videoVM = VideosViewModel()
     @State private var isRedirectToHome: Bool = false
     @State private var isActive : Bool = false
     
@@ -24,7 +25,10 @@ public struct ContentView: View {
             }else{
                 NavigationStack{
                     ZStack {
-                        EmptyView()
+                        AllVideosView(videoVM: self.videoVM)
+                    }
+                    .onAppear {
+                        self.videoVM.fetchAllVideo()
                     }
                 }
             }

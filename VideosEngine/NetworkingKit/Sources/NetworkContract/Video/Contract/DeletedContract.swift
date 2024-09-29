@@ -11,7 +11,7 @@ import Foundation
 public struct DeletedContract: BaseNetwork {
     public init () { }
     public var endpoint: String {
-        BaseUrlConstants.deletedVideo
+        BaseUrlConstants.deleteVideo
      }
     public var type: String{
          HTTPMethodType.delete.rawValue
