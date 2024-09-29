@@ -23,11 +23,11 @@ struct VideoCardView: View {
                     .cornerRadius(16)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(isNewVideo() ? Color.red : Color.white, lineWidth: 2)
+                            .stroke(video.isNew ? Color.red : Color.white, lineWidth: 2)
                     )
                     .shadow(radius: 5)
                 
-                if isNewVideo() {
+                if video.isNew {
                     Text("New Video")
                         .font(.Fonts.styleFont(.DMSansBold, size: 16))
                         .foregroundColor(Color.white)
@@ -39,15 +39,6 @@ struct VideoCardView: View {
             }
             .padding(.horizontal, 16)
         }
-    }
-    
-    private func isNewVideo() -> Bool {
-        let dateFormatter = ISO8601DateFormatter()
-        guard let uploadDate = dateFormatter.date(from: video.uploadDate) else {
-            return false
-        }
-        let currentDate = Date()
-        return uploadDate >= currentDate.addingTimeInterval(-10 * 60)
     }
 }
 

@@ -20,4 +20,13 @@ struct GetAllVideosModel: Identifiable {
         guard let url = URL(string: videoURLString) else { return nil }
         return AVPlayer(url: url)
     }
+    
+    var isNew: Bool {
+        let dateFormatter = ISO8601DateFormatter()
+        guard let uploadDate = dateFormatter.date(from: uploadDate) else {
+            return false
+        }
+        let currentDate = Date()
+        return uploadDate >= currentDate.addingTimeInterval(-2 * 60)
+    }
 }
