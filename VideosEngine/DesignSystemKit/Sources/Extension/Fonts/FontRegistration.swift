@@ -10,19 +10,30 @@ import CoreGraphics
 import CoreText
 
 public enum FontError: Swift.Error {
-    case failedToRegisterFont
+   case failedToRegisterFont
 }
 
 func registerFont(named name: String) throws {
-    guard let fontURL = Bundle.module.url(forResource: name, withExtension: nil, subdirectory: "Fonts") else {
+    guard let asset = NSDataAsset(name: "Fonts/\(name)", bundle: Bundle.module) else {
+        throw FontError.failedToRegisterFont
+    }
+    let fontData = asset.data as CFData
+    guard let fontDescriptors = CTFontManagerCreateFontDescriptorsFromData(fontData) as? [CTFontDescriptor],
+          !fontDescriptors.isEmpty else {
         throw FontError.failedToRegisterFont
     }
     
-    var fontError: Unmanaged<CFError>?
-    let success = CTFontManagerRegisterFontsForURL(fontURL as CFURL, .process, &fontError)
+    let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
     
-    if !success, let error = fontError?.takeRetainedValue() {
-        print("Failed to register font: \(error.localizedDescription)")
+    do {
+        try asset.data.write(to: tempURL)
+        var error: Unmanaged<CFError>?
+        let success = CTFontManagerRegisterFontsForURL(tempURL as CFURL, .process, &error)
+        
+        if !success {
+            throw FontError.failedToRegisterFont
+        }
+    } catch {
         throw FontError.failedToRegisterFont
     }
 }
