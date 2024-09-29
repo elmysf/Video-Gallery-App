@@ -27,6 +27,7 @@
 		72B239BA2CA918FC00AAFDF4 /* Video Gallery App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video Gallery App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B239CA2CA918FE00AAFDF4 /* Video Gallery AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video Gallery AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B239D42CA918FE00AAFDF4 /* Video Gallery AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video Gallery AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B239E72CA925F200AAFDF4 /* VideoEngine */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VideoEngine; path = ../VideoEngine; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		72B239B12CA918FC00AAFDF4 = {
 			isa = PBXGroup;
 			children = (
+				72B239E72CA925F200AAFDF4 /* VideoEngine */,
 				72B239BC2CA918FC00AAFDF4 /* Video Gallery App */,
 				72B239CD2CA918FE00AAFDF4 /* Video Gallery AppTests */,
 				72B239D72CA918FE00AAFDF4 /* Video Gallery AppUITests */,
