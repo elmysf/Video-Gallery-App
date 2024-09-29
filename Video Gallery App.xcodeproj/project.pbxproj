@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		72B239EC2CA92C5F00AAFDF4 /* AnalyticsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72B239EB2CA92C5F00AAFDF4 /* AnalyticsKit */; };
+		72B239EE2CA92C6300AAFDF4 /* DesignSystemKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72B239ED2CA92C6300AAFDF4 /* DesignSystemKit */; };
+		72B239F02CA92C6A00AAFDF4 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72B239EF2CA92C6A00AAFDF4 /* NetworkingKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		72B239CB2CA918FE00AAFDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B239EE2CA92C6300AAFDF4 /* DesignSystemKit in Frameworks */,
+				72B239EC2CA92C5F00AAFDF4 /* AnalyticsKit in Frameworks */,
+				72B239F02CA92C6A00AAFDF4 /* NetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +89,7 @@
 				72B239BC2CA918FC00AAFDF4 /* Video Gallery App */,
 				72B239CD2CA918FE00AAFDF4 /* Video Gallery AppTests */,
 				72B239D72CA918FE00AAFDF4 /* Video Gallery AppUITests */,
+				72B239EA2CA92C5F00AAFDF4 /* Frameworks */,
 				72B239BB2CA918FC00AAFDF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +102,13 @@
 				72B239D42CA918FE00AAFDF4 /* Video Gallery AppUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		72B239EA2CA92C5F00AAFDF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +131,9 @@
 			);
 			name = "Video Gallery App";
 			packageProductDependencies = (
+				72B239EB2CA92C5F00AAFDF4 /* AnalyticsKit */,
+				72B239ED2CA92C6300AAFDF4 /* DesignSystemKit */,
+				72B239EF2CA92C6A00AAFDF4 /* NetworkingKit */,
 			);
 			productName = "Video Gallery App";
 			productReference = 72B239BA2CA918FC00AAFDF4 /* Video Gallery App.app */;
@@ -562,6 +582,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72B239EB2CA92C5F00AAFDF4 /* AnalyticsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsKit;
+		};
+		72B239ED2CA92C6300AAFDF4 /* DesignSystemKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystemKit;
+		};
+		72B239EF2CA92C6A00AAFDF4 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkingKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 72B239B22CA918FC00AAFDF4 /* Project object */;
 }
