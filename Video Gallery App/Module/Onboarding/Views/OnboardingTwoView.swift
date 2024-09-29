@@ -1,3 +1,11 @@
+//
+//  OnboardingTwoView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import SwiftUI
 import DesignSystemKit
 
@@ -35,15 +43,15 @@ extension OnboardingTwoView{
         
         VStack(spacing: 4){
             Text("Your Stories, Our")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
             
             Text("Stage: Short, Sweet,")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
             
             Text("and Stunning!")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
         }
     }

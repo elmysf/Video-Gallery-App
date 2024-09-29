@@ -1,3 +1,11 @@
+//
+//  OnboardingOneView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import SwiftUI
 import DesignSystemKit
 
@@ -35,11 +43,11 @@ extension OnboardingOneView{
         
         VStack(spacing: 8){
             Text("Record Life's")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
             
             Text("Moments in a Flash")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
         }
     }

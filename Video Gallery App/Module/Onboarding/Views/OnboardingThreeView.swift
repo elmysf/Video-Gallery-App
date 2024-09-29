@@ -1,3 +1,11 @@
+//
+//  OnboardingThreeView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import SwiftUI
 import DesignSystemKit
 
@@ -34,7 +42,7 @@ extension OnboardingThreeView{
     @ViewBuilder private var OnboardingText: some View{
         HStack(spacing: 0){
             Text("Endless Inspiration!")
-                .font(.Fonts.styleFont(.dmSansBold, size: 24))
+                .font(.Fonts.styleFont(.DMSansBold, size: 24))
                 .foregroundColor(Color.white)
         }
     }

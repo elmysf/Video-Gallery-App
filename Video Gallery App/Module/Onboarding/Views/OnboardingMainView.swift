@@ -1,3 +1,11 @@
+//
+//  OnboardingMainView.swift
+//  Video Gallery App
+//
+//  Created by Sufiandy Elmy on 29/09/24.
+//
+
+
 import SwiftUI
 import DesignSystemKit
 import Combine
@@ -29,7 +37,7 @@ struct OnboardingMainView<Content: View>: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
                 .offset(x: CGFloat(self.currentIndex) * -geometry.size.width, y: 0)
-                .animation(.linear)
+                .animation(.linear, value: currentIndex)
                 .gesture(DragGesture().onChanged{ value in
                     self.slideGesture = value.translation
                 }
@@ -60,7 +68,7 @@ struct OnboardingMainView<Content: View>: View {
                                 .foregroundColor(index == self.currentIndex ?  Color.purple : Color.gray.opacity(0.25))
                                 .overlay(Circle().stroke(Color.clear, lineWidth: 1))
                                 .padding(.bottom, 8)
-                                .animation(.spring())
+                                .animation(.spring(), value: currentIndex)
                         }
                     }
                     .frame(maxWidth: .infinity,alignment: .center)
@@ -73,7 +81,7 @@ struct OnboardingMainView<Content: View>: View {
                                 if currentIndex != 2 && currentIndex > 0 {
                                     HStack(alignment: .center, spacing: 10) {
                                         Text("Back")
-                                            .font(.Fonts.styleFont(.dmSansBold, size: 16))
+                                            .font(.Fonts.styleFont(.DMSansBold, size: 16))
                                             .foregroundColor(Color.white)
                                     }
                                 }
@@ -100,12 +108,12 @@ struct OnboardingMainView<Content: View>: View {
                         }) {
                             if currentIndex == 2 {
                                 Text("Get Started!")
-                                    .font(.Fonts.styleFont(.dmSansBold, size: 16))
+                                    .font(.Fonts.styleFont(.DMSansBold, size: 16))
                                     .foregroundColor(Color.white)
                                     
                             }else{
                                 Text("Continue")
-                                    .font(.Fonts.styleFont(.dmSansBold, size: 16))
+                                    .font(.Fonts.styleFont(.DMSansBold, size: 16))
                                     .foregroundColor(Color.white)
                                     .frame(maxWidth: .infinity ,alignment: .trailing)
                                     .background(Color.clear)
