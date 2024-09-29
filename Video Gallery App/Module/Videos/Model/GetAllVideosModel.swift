@@ -11,6 +11,7 @@ import AVFoundation
 
 struct GetAllVideosModel: Identifiable {
     var id: String { publicID }
+    var uploadDate: String
     let publicID: String
     let displayName: String
     let videoURLString: String

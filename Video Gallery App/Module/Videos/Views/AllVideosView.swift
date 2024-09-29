@@ -14,7 +14,6 @@ import AVKit
 struct AllVideosView: View {
     @ObservedObject var videoVM: VideosViewModel
     @State private var videoToDelete: GetAllVideosModel? = nil
-    
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 16)]
 
     var body: some View {
@@ -27,7 +26,7 @@ struct AllVideosView: View {
                                 NavigationLink(destination: VideoPlayerView(video: item)) {
                                     VideoCardView(video: item)
                                         .contextMenu {
-                                            Button("Delete Video") {
+                                            Button("Delete Video", role: .destructive) {
                                                 self.videoToDelete = item
                                                 self.videoVM.showDeleteConfirmation = true
                                             }
@@ -36,6 +35,9 @@ struct AllVideosView: View {
                             }
                         }
                     }
+                }
+                .refreshable {
+                    self.videoVM.fetchAllVideo()
                 }
             }
             .frame(maxWidth: .infinity)

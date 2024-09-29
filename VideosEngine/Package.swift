@@ -25,7 +25,7 @@ let targets = [
 let package = Package(
     name: "VideosEngine",
     defaultLocalization: "en",
-    platforms: [.iOS(.v18), .watchOS(.v10)],
+    platforms: [.iOS(.v17), .watchOS(.v10)],
     products: libraries(from: targets),
     dependencies: [
         // Anything Swift Package Manager for use

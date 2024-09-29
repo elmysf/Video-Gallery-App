@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct NameFonts : Sendable{
+public struct NameFonts: Sendable {
     public let name: String
     
     private init(named name: String) {
@@ -21,7 +21,7 @@ public struct NameFonts : Sendable{
     }
     
     // DM Sans fonts
-    @MainActor public static let DMSansBold = NameFonts(named: "DMSans-Bold")
-    @MainActor public static let DMSansMedium = NameFonts(named: "DMSans-Bold")
-    @MainActor public static let DMSansRegular = NameFonts(named: "DMSans-Bold")
+    public static let DMSansBold = NameFonts(named: "DMSans-Bold")
+    public static let DMSansMedium = NameFonts(named: "DMSans-Medium")
+    public static let DMSansRegular = NameFonts(named: "DMSans-Regular")
 }

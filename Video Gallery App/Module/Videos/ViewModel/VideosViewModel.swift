@@ -87,7 +87,7 @@ public class VideosViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] (video) in
                 let videoVM = video.resources.map { item in
-                    GetAllVideosModel(publicID: item.publicID,
+                    GetAllVideosModel(uploadDate: item.createdAt, publicID: item.publicID,
                                       displayName: item.displayName,
                                       videoURLString: item.url)
                     
