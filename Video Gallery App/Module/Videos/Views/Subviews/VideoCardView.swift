@@ -38,6 +38,12 @@ struct VideoCardView: View {
                 }
             }
             .padding(.horizontal, 16)
+            
+            Image(systemName: "play.circle")
+                .foregroundColor(.white)
+                .padding()
+                .background(.thinMaterial)
+                .cornerRadius(50)
         }
     }
 }
