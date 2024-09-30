@@ -40,10 +40,7 @@ The project follows the MVVM architecture, which separates the user interface fr
 - It is assumed that any required API services are available and properly configured in the application.
 - Users are expected to have Xcode installed and set up on their machines to build and run the project.
 
-## 
-on this view not show video player but use hardcode image:
+## ScreenShoot
 
-<img src="https://github.com/elmysf/Video-Gallery-App/blob/main/Image.jpeg" width="200" />
-
-that's because there was a problem:
-`The main thread was blocked by a synchronous property query on an unloaded property (MediaCharacteristicArray) for an HTTP(S) asset. This can be a problem if this asset is read from a slow network.`
+<img src="https://github.com/elmysf/Video-Gallery-App/blob/main/Screenshoot.jpg" width="800" />
+<img src="https://github.com/elmysf/Video-Gallery-App/blob/main/Strurctue.jpg" width="800" />
