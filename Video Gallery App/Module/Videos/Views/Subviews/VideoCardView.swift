@@ -12,11 +12,12 @@ import DesignSystemKit
 struct VideoCardView: View {
     
     var video: GetAllVideosModel
+    let randomImages = [Image.imgOne, Image.imgTwo, Image.imgThree]
     
     var body: some View {
         ZStack {
             ZStack(alignment: .bottomLeading) {
-                Image.imgOne
+                randomImages.randomElement()?
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 180, height: 250)
